@@ -18,12 +18,12 @@ app.post('/photo', upload.single('image'), (req, res) => {
     // The uploaded file is available in req.file.buffer
     // You can process it as needed
 
-    // if (!req.file) {
-    //     return res.status(400).send('No file uploaded.');
-    // }
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
 
-    console.log(req.body);  // Contains fields other than files
-    console.log(req.file);  // Contains the uploaded file details
+    // console.log(req.body);  // Contains fields other than files
+    // console.log(req.file);  // Contains the uploaded file details
 
     // Process the uploaded file or send a response
     res.status(200).send('File uploaded successfully.');
