@@ -4,23 +4,15 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 const multer = require('multer');
 const upload = require('./middleware/multer_middleware')
+const path = require('path');
 
 app.use(express.json());
 app.use(cors());
 
-// // Setup multer for handling file uploads
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         // console.log(file);
-//         return cb(null, "./uploads");
-//     },
-//     filename: function async(req, file, cb) {
-//         const uniquename = `${Date.now()}-${file.originalname}`;
-//         cb(null, uniquename);
-//         return;
-//     },
-// })
-// const upload = multer({ storage: storage });
+app.get('/', (req, res) => {
+    app.use(express.static(path.resolve(__dirname, 'client', 'dist')))
+    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
+})
 
 app.post('/photo', upload.single('image'), (req, res) => {
     // The uploaded file is available in req.file.buffer
