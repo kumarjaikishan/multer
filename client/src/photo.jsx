@@ -20,7 +20,7 @@ const Photo = () => {
         formData.append('image', image);
 
         try {
-            const response = await fetch('http://localhost:5000/photo', {
+            const response = await fetch('/photo', {
                 method: 'POST',
                 body: formData,
             });
