@@ -25,7 +25,8 @@ app.get('/file', (req, res) => {
    res.status(200).sendFile(path.resolve(__dirname, 'uploads', 'just.html'));
 })
 
-app.post('/photo', upload.single('image'), async (req, res) => {
+// app.post('/photo', upload.single('image'), async (req, res) => {
+app.post('/photo', async (req, res) => {
 
     if (!req.file) {
         return res.status(400).json({
@@ -34,28 +35,29 @@ app.post('/photo', upload.single('image'), async (req, res) => {
     }
 
     try {
-        console.log("finding folder",__dirname + req.file.path);
-        await cloudinary.uploader.upload(__dirname + req.file.path, (error, result) => {
-            console.log(error, result);
-            if (error) {
-                return res.status(500).json({
-                    msg:error
-                });
-            }
+        // console.log("finding folder",__dirname + req.file.path);
+        return res.status(500).json({msg:__dirname });
+        // await cloudinary.uploader.upload(__dirname + req.file.path, (error, result) => {
+        //     console.log(error, result);
+        //     if (error) {
+        //         return res.status(500).json({
+        //             msg:error
+        //         });
+        //     }
 
-            fs.unlink(req.file.path, (err => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json("error occured while deleting file");
-                }   else {
-                    console.log("file deleted");
-                    return res.status(201).json({msg:'file uploaded'});
-                    // Get the files in current directory 
-                    // after deletion 
-                    //   getFilesInDirectory(); 
-                }
-            }));
-        })
+        //     fs.unlink(req.file.path, (err => {
+        //         if (err) {
+        //             console.log(err);
+        //             return res.status(500).json("error occured while deleting file");
+        //         }   else {
+        //             console.log("file deleted");
+        //             return res.status(201).json({msg:'file uploaded'});
+        //             // Get the files in current directory 
+        //             // after deletion 
+        //             //   getFilesInDirectory(); 
+        //         }
+        //     }));
+        // })
     } catch (error) {
         console.log(error);
         return res.status(500).json(error);
