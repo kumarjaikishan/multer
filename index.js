@@ -35,31 +35,31 @@ app.post('/photo', upload.single('image'), async (req, res) => {
 
     try {
         // console.log("finding folder",__dirname + req.file.path);
-        return res.status(200).json({
-            msg: req.file.path,
-            faltu:"yei wala" 
-        });
-        // await cloudinary.uploader.upload(__dirname + req.file.path, (error, result) => {
-        //     console.log(error, result);
-        //     if (error) {
-        //         return res.status(500).json({
-        //             msg:error
-        //         });
-        //     }
+        // return res.status(200).json({
+        //     msg: req.file.path,
+        //     faltu:"yei wala" 
+        // });
+        await cloudinary.uploader.upload(req.file.path, (error, result) => {
+            console.log(error, result);
+            if (error) {
+                return res.status(500).json({
+                    msg:error
+                });
+            }
 
-        //     fs.unlink(req.file.path, (err => {
-        //         if (err) {
-        //             console.log(err);
-        //             return res.status(500).json("error occured while deleting file");
-        //         }   else {
-        //             console.log("file deleted");
-        //             return res.status(201).json({msg:'file uploaded'});
-        //             // Get the files in current directory 
-        //             // after deletion 
-        //             //   getFilesInDirectory(); 
-        //         }
-        //     }));
-        // })
+            fs.unlink(req.file.path, (err => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json("error occured while deleting file");
+                }   else {
+                    console.log("file deleted");
+                    return res.status(201).json({msg:'file uploaded'});
+                    // Get the files in current directory 
+                    // after deletion 
+                    //   getFilesInDirectory(); 
+                }
+            }));
+        })
     } catch (error) {
         console.log(error);
         return res.status(500).json(error);
