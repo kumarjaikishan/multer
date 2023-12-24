@@ -26,7 +26,9 @@ const Photo = () => {
             });
 
             // Handle the response as needed
-            console.log('Upload successful:', response);
+            // console.log('Upload successful:', response);
+            const result = await response.json();
+            console.log(result);
         } catch (error) {
             console.error('Error uploading photo:', error);
         }
