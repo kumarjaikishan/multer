@@ -25,18 +25,17 @@ app.get('/file', (req, res) => {
    res.status(200).sendFile(path.resolve(__dirname, 'uploads', 'just.html'));
 })
 
-// app.post('/photo', upload.single('image'), async (req, res) => {
-app.post('/photo', async (req, res) => {
+app.post('/photo', upload.single('image'), async (req, res) => {
 
-    // if (!req.file) {
-    //     return res.status(400).json({
-    //         msg:'No file uploaded.'
-    //     });
-    // }
+    if (!req.file) {
+        return res.status(400).json({
+            msg:'No file uploaded.'
+        });
+    }
 
     try {
         // console.log("finding folder",__dirname + req.file.path);
-        return res.status(500).json({msg:__dirname });
+        return res.status(500).json({msg: req.file.path });
         // await cloudinary.uploader.upload(__dirname + req.file.path, (error, result) => {
         //     console.log(error, result);
         //     if (error) {
