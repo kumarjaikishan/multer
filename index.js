@@ -28,11 +28,11 @@ app.get('/file', (req, res) => {
 // app.post('/photo', upload.single('image'), async (req, res) => {
 app.post('/photo', async (req, res) => {
 
-    if (!req.file) {
-        return res.status(400).json({
-            msg:'No file uploaded.'
-        });
-    }
+    // if (!req.file) {
+    //     return res.status(400).json({
+    //         msg:'No file uploaded.'
+    //     });
+    // }
 
     try {
         // console.log("finding folder",__dirname + req.file.path);
