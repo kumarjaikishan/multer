@@ -35,7 +35,10 @@ app.post('/photo', upload.single('image'), async (req, res) => {
 
     try {
         // console.log("finding folder",__dirname + req.file.path);
-        return res.status(500).json({msg: req.file.path,faltu:"yei wala" });
+        return res.status(200).json({
+            msg: req.file.path,
+            faltu:"yei wala" 
+        });
         // await cloudinary.uploader.upload(__dirname + req.file.path, (error, result) => {
         //     console.log(error, result);
         //     if (error) {
