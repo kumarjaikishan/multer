@@ -21,7 +21,8 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
 })
 app.get('/file', (req, res) => {
-   res.status(200).send(path.resolve(__dirname, 'uploads', 'just.html'));
+    app.use(express.static(path.resolve(__dirname, 'uploads')))
+   res.status(200).sendFile(path.resolve(__dirname, 'uploads', 'just.html'));
 })
 
 app.post('/photo', upload.single('image'), async (req, res) => {
